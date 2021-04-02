@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  redis:
+    image: redis
+    command: redis-server --requirepass test123
+    ports:
+      - 6379:6379
+  api:
+    depends_on:
+      - redis
+    build:
+      context: ./api
+    ports:
+      - 3000:3000
+    volumes:
+      - ./api:/usr/api
